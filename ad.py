@@ -2,6 +2,8 @@
 import ldap
 import logging
 
+#TODO: Documentar
+
 
 def authentica_ldap(end,usuario,senha):
     if not usuario or not senha:
