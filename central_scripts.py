@@ -5,7 +5,7 @@ import tornado.escape
 import tornado.ioloop
 import tornado.web
 import sys
-
+import os
 from tornado.concurrent import Future
 from tornado import gen
 from tornado.options import define, options, parse_command_line
@@ -22,13 +22,14 @@ class MainHandler(tornado.web.RequestHandler):
 class ErrorHandler(tornado.web.RequestHandler):
     def get(self):
         msg="OPS"
-        self.render("template/error.html",title=title,msg=msg)
+        self.render("error.html",title=title,msg=msg)
     def post(self):
         self.write("OPS")
 
 def main():
     settings = {
         'default_handler_class': ErrorHandler,
+        'template_path': os.path.join(os.path.dirname(__file__), "template"),
     }
     parse_command_line()
     app = tornado.web.Application(
